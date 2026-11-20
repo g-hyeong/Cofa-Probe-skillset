@@ -1,4 +1,4 @@
-# SKHY Skills 개발
+# Cofa-Probe-skillset 개발
 
 - 이 저장소는 `task-discovery`, `solution-design`, `plan-execution`, `delegate-work` 네 스킬과 일회성 로컬 설치기를 관리한다.
 - 기존 일반 개발 하네스와 개인 전역 스킬은 보존하고 이 저장소의 대회용 묶음만 수정한다.
@@ -9,5 +9,5 @@
 - 설치기는 Node 내장 기능만 사용한다. 새 의존성·서비스·권한 확대는 이미 승인된 범위 외에는 확인한다.
 - 커밋은 논리 단위별 Conventional Commits 한국어 제목, 빈 줄, 한국어 불릿 본문을 사용한다. 호환성 변경은 ! 또는 BREAKING CHANGE로 표시한다.
 - 검증은 `npm run check`, `npm test`, `npm pack --dry-run`, 별도 프로젝트의 로컬 패키지 설치·참조 접근과 필요한 워크플로우 시나리오 점검이다.
-- 이 저장소 변경의 푸시 대상은 승인된 공개 원격 `g-hyeong/skhyskills`다. npm 레지스트리 배포와 추가 외부 게시는 별도 요청 전 수행하지 않는다.
+- 이 저장소 변경의 푸시 대상은 승인된 공개 원격 `g-hyeong/Cofa-Probe-skillset`이다. npm 레지스트리 배포와 추가 외부 게시는 별도 요청 전 수행하지 않는다.
 - 배포물에는 스킬·설치기·사용 안내·라이선스만 포함한다.

@@ -1,4 +1,4 @@
-# SKHY Skills
+# Cofa-Probe-skillset
 
 SK하이닉스 AI 해커톤의 과제 이해부터 설계·구현·검증까지 연결하는 개인 제작 스킬 네 가지다. IDE의 기본 도구로 실행하며 제공 과제의 지침·구조·제출 경로와 실제 운영 규정을 우선한다.
 
@@ -50,10 +50,10 @@ project/
 
 ## 설치
 
-설치할 프로젝트 폴더에서 다음 명령으로 [공개 저장소](https://github.com/g-hyeong/skhyskills)의 소스를 실행한다.
+설치할 프로젝트 폴더에서 다음 명령으로 [공개 저장소](https://github.com/g-hyeong/Cofa-Probe-skillset)의 소스를 실행한다.
 
 ```sh
-npx --yes --package=github:g-hyeong/skhyskills skhyskills --root "$PWD"
+npx --yes --package=github:g-hyeong/Cofa-Probe-skillset skhyskills --root "$PWD"
 ```
 
 아래 명령은 이미 내려받은 로컬 소스에서 설치할 때 사용한다.
@@ -61,7 +61,7 @@ npx --yes --package=github:g-hyeong/skhyskills skhyskills --root "$PWD"
 설치기는 Node.js 22 이상, 외부 의존성 없이 한 번 실행하고 종료한다.
 
 ```sh
-node /path/to/skhyskills/bin/install.mjs --root /absolute/path/to/project
+node /path/to/Cofa-Probe-skillset/bin/install.mjs --root /absolute/path/to/project
 ```
 
 설치기는 대상 프로젝트 `.agents/skills/`에 네 폴더만 복사한다. 루트 `AGENTS.md`는 이후 실제 과제의 설계를 마쳤을 때 개발 정책 반영 단계에서 작성한다. 직접 복사하려면 네 폴더를 함께 두어 상대 참조를 보존한다. IDE에서 검색되지 않으면 `.agents/skills/task-discovery/SKILL.md`를 읽게 하거나 호스트의 재탐색 절차를 따른다. 실제 시험 IDE의 자동 검색·위임 모델 선택은 별도 현장 확인 대상이다.
@@ -69,7 +69,7 @@ node /path/to/skhyskills/bin/install.mjs --root /absolute/path/to/project
 대상에 있는 같은 이름의 스킬 내용이 다르면 기본 설치는 변경 전에 중단한다. 차이를 검토하고 해당 설치본을 교체할 때만 다음 명령을 실행한다.
 
 ```sh
-node /path/to/skhyskills/bin/install.mjs --root /absolute/path/to/project --replace-existing
+node /path/to/Cofa-Probe-skillset/bin/install.mjs --root /absolute/path/to/project --replace-existing
 ```
 
 교체할 설치본은 `.skhy/backups/<id>/`에 백업한다. 다른 이름의 스킬은 그대로 두고, 동일 프로젝트에는 설치기를 한 번에 하나만 실행한다.
