@@ -57,10 +57,10 @@ export function install(rootInput, { replaceExisting = false } = {}) {
     throw new Error(`Existing skills differ: ${conflicts.map(x => x.name).join(', ')}. Review them before using --replace-existing to back up and replace them.`);
   const changes = plan.filter(x => !x.unchanged);
   if (!changes.length) return { version: VERSION, installed: [], unchanged: SKILLS, backup: null };
-  const backupRelative = conflicts.length ? `.skhy/backups/${Date.now()}-${randomUUID()}` : null;
+  const backupRelative = conflicts.length ? `.cofa-probe/backups/${Date.now()}-${randomUUID()}` : null;
   const backup = backupRelative ? safePath(root, backupRelative) : null;
   fs.mkdirSync(discovery, { recursive: true });
-  const staging = fs.mkdtempSync(path.join(safePath(root, '.agents'), '.skhyskills-'));
+  const staging = fs.mkdtempSync(path.join(safePath(root, '.agents'), '.cofa-probe-skillset-'));
   const applied = [];
   try {
     for (const item of changes) fs.cpSync(item.source, path.join(staging, item.name), { recursive: true, errorOnExist: true, force: false });
@@ -90,7 +90,7 @@ export function install(rootInput, { replaceExisting = false } = {}) {
 
 function main(args) {
   if (!args.length || args.includes('--help')) {
-    console.log('Usage: skhyskills --root <project-directory> [--replace-existing]\nInstalls four local skills. --replace-existing backs up differing skill directories under .skhy/backups before replacement.'); return;
+    console.log('Usage: cofa-probe-skillset --root <project-directory> [--replace-existing]\nInstalls four local skills. --replace-existing backs up differing skill directories under .cofa-probe/backups before replacement.'); return;
   }
   if (args.length === 1 && args[0] === '--version') { console.log(VERSION); return; }
   let root, replaceExisting = false;

@@ -1,9 +1,9 @@
 {
-  "name": "skhyskills",
+  "name": "cofa-probe-skillset",
   "version": "0.2.0",
-  "description": "Portable hackathon skills with a one-shot local installer",
+  "description": "Independently built agent skills for KRAFTON's Cofa Probe assessment with a local installer",
   "type": "module",
-  "bin": { "skhyskills": "bin/install.mjs" },
+  "bin": { "cofa-probe-skillset": "bin/install.mjs" },
   "files": ["bin", "skills", "README.md", "LICENSE"],
   "engines": { "node": ">=22" },
   "license": "MIT",

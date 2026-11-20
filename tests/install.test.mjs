@@ -10,7 +10,7 @@ import { install, SKILLS, VERSION } from '../bin/install.mjs';
 
 const entry = fileURLToPath(new URL('../bin/install.mjs', import.meta.url));
 function fixture(t) {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'skhy skills-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cofa-probe-skillset-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true })); return root;
 }
 const skill = (root, name = 'plan-execution') => path.join(root, '.agents/skills', name);
@@ -24,7 +24,7 @@ test('fresh installation exits with four standalone directories and preserves th
     assert.ok(fs.readFileSync(path.join(skill(root, name), 'SKILL.md'), 'utf8').length);
   }
   assert.equal(fs.readFileSync(path.join(root, 'AGENTS.md'), 'utf8'), 'User rules');
-  assert.ok(!fs.existsSync(path.join(root, '.skhy')));
+  assert.ok(!fs.existsSync(path.join(root, '.cofa-probe')));
   assert.ok(!fs.existsSync(path.join(root, 'node_modules')));
 });
 test('unchanged installation is idempotent and needs no backup', t => {
@@ -45,6 +45,7 @@ test('explicit replacement backs up complete custom skills and leaves unrelated 
   fs.writeFileSync(path.join(skill(root), 'custom.txt'), 'Preserve this file');
   fs.mkdirSync(skill(root, 'unrelated')); fs.writeFileSync(path.join(skill(root, 'unrelated'), 'SKILL.md'), 'Other');
   const result = install(root, { replaceExisting: true });
+  assert.match(result.backup, /^\.cofa-probe\/backups\/[^/]+$/);
   assert.equal(fs.readFileSync(path.join(root, result.backup, 'plan-execution/SKILL.md'), 'utf8'), 'Custom rule');
   assert.equal(fs.readFileSync(path.join(root, result.backup, 'plan-execution/custom.txt'), 'utf8'), 'Preserve this file');
   assert.ok(!fs.existsSync(path.join(skill(root), 'custom.txt')));
@@ -62,7 +63,7 @@ test('symlinked discovery and backup parents cannot escape the project', t => {
   const root = fixture(t), outside = fixture(t); fs.symlinkSync(outside, path.join(root, '.agents'), 'dir');
   assert.throws(() => install(root), /Symlink/); fs.unlinkSync(path.join(root, '.agents'));
   install(root); fs.writeFileSync(path.join(skill(root), 'SKILL.md'), 'Custom');
-  fs.symlinkSync(outside, path.join(root, '.skhy'), 'dir');
+  fs.symlinkSync(outside, path.join(root, '.cofa-probe'), 'dir');
   assert.throws(() => install(root, { replaceExisting: true }), /Symlink/);
   assert.deepEqual(fs.readdirSync(outside), []);
 });
@@ -78,7 +79,7 @@ test('filesystem failure during replacement restores earlier directories', t => 
   fs.rmSync(skill(root, 'solution-design'), { recursive: true });
   const original = fs.renameSync;
   fs.renameSync = (from, to) => {
-    if (String(from).includes('.skhyskills-') && to === skill(fs.realpathSync(root), 'plan-execution')) throw new Error('Synthetic disk error');
+    if (String(from).includes('.cofa-probe-skillset-') && to === skill(fs.realpathSync(root), 'plan-execution')) throw new Error('Synthetic disk error');
     return original(from, to);
   };
   syncBuiltinESMExports();
@@ -91,7 +92,7 @@ test('filesystem failure during replacement restores earlier directories', t => 
   assert.deepEqual(retry.unchanged, ['delegate-work']);
 });
 test('CLI works through an npm-style executable symlink', t => {
-  const root = fixture(t), link = path.join(root, 'skhyskills'); fs.symlinkSync(entry, link);
+  const root = fixture(t), link = path.join(root, 'cofa-probe-skillset'); fs.symlinkSync(entry, link);
   const result = JSON.parse(execFileSync(process.execPath, [link, '--root', root], { encoding: 'utf8' }));
   assert.deepEqual(result.installed, SKILLS);
 });

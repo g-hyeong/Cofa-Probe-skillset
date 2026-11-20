@@ -1,18 +1,18 @@
 # Cofa-Probe-skillset
 
-SK하이닉스 AI 해커톤의 과제 이해부터 설계·구현·검증까지 연결하는 개인 제작 스킬 네 가지다. IDE의 기본 도구로 실행하며 제공 과제의 지침·구조·제출 경로와 실제 운영 규정을 우선한다.
+크래프톤의 Cofa Probe AI 역량평가에서 실무 과제를 풀 때 쓰도록 개인이 만든 에이전트 스킬셋이다. 과제 이해부터 설계·구현·검증까지 이어 주고, 판단 근거와 확인 결과를 기록한다. 시험에서는 해당 회차의 스킬 설치, 도구 사용, 제출 안내를 따른다. [Cofa Probe 공식 안내](https://www.getcofa.com/ko/probe)
 
 ## 스킬과 흐름
 
 | 순서 | 스킬 | 책임 |
 | --- | --- | --- |
-| 1 | [task-discovery](skills/task-discovery/SKILL.md) | 요구사항과 필요한 반도체·SK하이닉스 업무 맥락을 조사해 과제를 이해한다. |
+| 1 | [task-discovery](skills/task-discovery/SKILL.md) | 요구사항과 과제에 필요한 업무 맥락을 파악하고, 판단이나 검증에 필요한 질문을 정리한다. |
 | 2 | [solution-design](skills/solution-design/SKILL.md) | 업무 순서대로 해결 방향을 합의해 설계서를 쓰고 개발 정책을 프로젝트 지침에 반영한다. |
 | 3 | [plan-execution](skills/plan-execution/SKILL.md) | 구현 관점 계획을 검토·승인받고 구현한 뒤 실제 결과를 검증한다. |
 | 필요 시 | [delegate-work](skills/delegate-work/SKILL.md) | 독립 작업에 적합한 위임 방식·모델·맥락·담당 범위를 정한다. |
 
-1. **과제 분석과 현업 확인.** 과제 원문과 제공 자료로 업무 흐름과 판단 기준을 분석해 `.skhy/discovery.md`에 저장한다. 자료만으로 결정할 수 없는 업무·검증 기준은 문서 끝부분의 **확인이 필요한 부분**에 번호로 정리한다. 사용자가 질문을 현업 챗봇에 직접 보내고 답변을 전달하면 같은 번호에 답과 적용 범위를 기록하고 관련 본문도 고친다. 핵심 질문이 남으면 그 문서에서 이어가고, 해소되면 설계로 넘긴다. [분석·질문 형식](skills/task-discovery/references/discovery-output.md)
-2. **업무 순서에 따른 설계.** 담당자가 어디서 시작해 어떤 정보를 확인하고 어떤 결과를 누구에게 넘기는지 먼저 짚는다. 각 단계에서 실제로 열려 있는 선택을 하나씩 합의하고, 최종 `.skhy/design.md`도 그 순서로 작성한다. [설계 대화와 산출물](skills/solution-design/references/design-dialogue.md)
+1. **과제 분석과 요구 확인.** 과제 원문과 제공 자료로 업무 흐름과 판단 기준을 분석해 `.cofa-probe/discovery.md`에 저장한다. 자료만으로 결정할 수 없는 업무·검증 기준은 문서 끝부분의 **확인이 필요한 부분**에 번호로 정리한다. 사용자가 답변을 전달하면 같은 번호에 답과 적용 범위를 기록하고 본문도 갱신한다. 핵심 질문이 남으면 그 문서에서 이어가고, 해소되면 설계로 넘긴다. [분석·질문 형식](skills/task-discovery/references/discovery-output.md)
+2. **업무 순서에 따른 설계.** 담당자가 어디서 시작해 어떤 정보를 확인하고 어떤 결과를 누구에게 넘기는지 먼저 짚는다. 각 단계에서 실제로 열려 있는 선택을 하나씩 합의하고, 최종 `.cofa-probe/design.md`도 그 순서로 작성한다. [설계 대화와 산출물](skills/solution-design/references/design-dialogue.md)
 3. **개발 정책 반영.** 설계에서 합의한 스택·폴더별 책임·코드 및 Git 규칙·검증 방법을 대상 프로젝트 루트 `AGENTS.md`에 반영한다. 기존 지침을 보존하고 충돌하는 결정만 확인한다. [개발 정책 반영](skills/solution-design/references/development-policy.md)
 4. **실행 계획과 개발.** 확정 설계와 반영된 정책을 읽어 작업별 실행 계획을 검토한다. 사용자가 구체적인 계획을 승인하면 구현과 검증을 진행한다.
 
@@ -34,7 +34,7 @@ plan-execution은 가벼운 진입점이며 아래 중 **현재 단계 지침만
 project/
   AGENTS.md                      # 설계 후 반영한 프로젝트 개발 정책
   .agents/skills/                 # 설치된 네 스킬과 필요한 참조
-  .skhy/
+  .cofa-probe/
     discovery.md                 # 프로젝트 공통: 문제 분석·용어·요구·근거
     design.md                    # 프로젝트 공통: 합의한 해결 방향·구조·정책
     tasks/<작업-id>/             # plan-execution의 개별 구현 작업
@@ -53,7 +53,7 @@ project/
 설치할 프로젝트 폴더에서 다음 명령으로 [공개 저장소](https://github.com/g-hyeong/Cofa-Probe-skillset)의 소스를 실행한다.
 
 ```sh
-npx --yes --package=github:g-hyeong/Cofa-Probe-skillset skhyskills --root "$PWD"
+npx --yes --package=github:g-hyeong/Cofa-Probe-skillset cofa-probe-skillset --root "$PWD"
 ```
 
 아래 명령은 이미 내려받은 로컬 소스에서 설치할 때 사용한다.
@@ -72,7 +72,9 @@ node /path/to/Cofa-Probe-skillset/bin/install.mjs --root /absolute/path/to/proje
 node /path/to/Cofa-Probe-skillset/bin/install.mjs --root /absolute/path/to/project --replace-existing
 ```
 
-교체할 설치본은 `.skhy/backups/<id>/`에 백업한다. 다른 이름의 스킬은 그대로 두고, 동일 프로젝트에는 설치기를 한 번에 하나만 실행한다.
+교체할 설치본은 `.cofa-probe/backups/<id>/`에 백업한다. 다른 이름의 스킬은 그대로 두고, 동일 프로젝트에는 설치기를 한 번에 하나만 실행한다.
+
+이전 버전이 설치된 프로젝트는 위 교체 절차를 따른다. 이어갈 분석·설계·작업 기록은 `.cofa-probe/` 아래의 대응 경로에 복사하고, 문서에 적힌 경로도 갱신한다. 같은 경로에 이미 기록이 있으면 두 내용을 대조해 필요한 부분을 반영한다.
 
 ## 개발 검증
 
